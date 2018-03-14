@@ -11,6 +11,8 @@ restService.use(bodyParser.urlencoded({
 }));
 restService.use(bodyParser.json());
 
+var mssql = require('mssql');
+
 
 restService.post('/',function( req,res ){
     console.log( "Email : " + req.body.email );
