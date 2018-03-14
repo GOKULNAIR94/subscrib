@@ -20,9 +20,39 @@ var mssql = require('mssql');
 
 
 restService.post('/updatedb',function( req,res ){
-    console.log( "Email : " + req.body.email );
-    console.log( "Email : " + JSON.stringify(req.body) );
-    res.send("success");
+    try{
+        console.log( "Email : " + req.body.email );
+        var emailId = req.body.email;
+        console.log( "Email : " + JSON.stringify(req.body) );
+        var sqlConfig = {
+            user: 'viki',
+            password: 'Oracle123',
+            server: 'vikisql.c1abev5luwmn.us-west-1.rds.amazonaws.com',
+            database: 'viki'
+
+        }
+        var qString = "";
+
+        qString = "INSERT INTO Subscribers (email) VALUES ('" + emailId + "')";
+
+
+        sql.connect(sqlConfig, function(err) {
+            var request = new sql.Request();
+            request.query( qString, function(err, output) {
+                if (err){ console.log(err); }
+                    else{
+                        console.log(output); // Result in JSON format
+                    }
+                    sql.close();
+                    res.send("success");
+            });
+        });
+    }
+    catch(e){
+        console.log("Error : " + e);
+        res.send("error");
+    }
+    
 });
 
 restService.listen((process.env.PORT || 9000), function() {
