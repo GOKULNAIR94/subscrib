@@ -3,6 +3,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
+var cors = require('cors');
+restService.options('*', cors());
+
 var https = require('https');
 var fs = require('fs'),
     path = require('path');
@@ -10,6 +13,7 @@ restService.use(bodyParser.urlencoded({
     extended: true
 }));
 restService.use(bodyParser.json());
+
 
 var mssql = require('mssql');
 
