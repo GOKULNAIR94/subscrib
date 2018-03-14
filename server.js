@@ -22,7 +22,7 @@ var mssql = require('mssql');
 restService.post('/updatedb',function( req,res ){
     console.log( "Email : " + req.body.email );
     console.log( "Email : " + JSON.stringify(req.body) );
-    res.json({status: "success" });
+    res.send("success");
 });
 
 restService.listen((process.env.PORT || 9000), function() {
