@@ -44,13 +44,13 @@ restService.post('/updatedb',function( req,res ){
                         console.log(output); // Result in JSON format
                     }
                     sql.close();
-                    res.json({"status":"success"});
+                    res.send(JSON.stringify({"status":"success"}));
             });
         });
     }
     catch(e){
         console.log("Error : " + e);
-        res.json({"status":"success"});
+        res.json({"status":"error"});
     }
     
 });
