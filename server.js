@@ -44,7 +44,7 @@ restService.post('/updatedb',function( req,res ){
                         console.log(output); // Result in JSON format
                     }
                     sql.close();
-                    res.send(JSON.stringify({"status":"success"}));
+                    res.json({"status":"success"});
             });
         });
     }
