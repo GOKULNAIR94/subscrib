@@ -4,7 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
 var cors = require('cors');
-restService.options('*', cors());
+
+restService.use(cors());
 
 var https = require('https');
 var fs = require('fs'),
