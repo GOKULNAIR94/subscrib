@@ -16,7 +16,7 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 
-var mssql = require('mssql');
+var sql = require('mssql');
 
 
 restService.post('/updatedb',function( req,res ){
