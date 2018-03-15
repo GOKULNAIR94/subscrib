@@ -52,19 +52,19 @@ module.exports = function( emailContent, req, res) {
                 if (error) {
                     console.log('Error occurred');
                     console.log(error.message);
-                    return;
+                    res.json({"status":"error"});
                 }
 //                console.log('Message sent successfully!');
-                console.log('Server responded with "%s"', info.response);
-                transporter.close();
+                else{
+                    console.log('Server responded with "%s"', info.response);
+                    console.log('Sending Mail');
+                    transporter.close();
+                    res.json({"status":"success"});
+                }
             });
         }
     });
 
     
-    console.log('Sending Mail');
-    setTimeout(function() {
-        res.json({"status":"success"});
-    }, 1000);
 
 }
