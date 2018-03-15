@@ -15,9 +15,10 @@ restService.use(bodyParser.urlencoded({
 }));
 restService.use(bodyParser.json());
 
-
+var SendEmail = require('./sendEmail');
 var sql = require('mssql');
 
+var emailContent = {};
 
 restService.post('/updatedb',function( req,res ){
     try{
@@ -40,11 +41,20 @@ restService.post('/updatedb',function( req,res ){
             var request = new sql.Request();
             request.query( qString, function(err, output) {
                 if (err){ console.log(err); }
-                    else{
-                        console.log(output); // Result in JSON format
-                    }
-                    sql.close();
-                    res.json({"status":"success"});
+                else{
+                    console.log(output); // Result in JSON format
+                }
+                sql.close();
+                
+                emailContent.toemail = emailId;
+                emailContent.subject = "Thank you for Subscribing";
+                emailContent.body = '<p><b>Hello Subscriber,</b></p>' +
+                    '<p>Thank you for subscribing. We will keep you updated.</p>' +
+                    '<p>Thanks,<br><b>Viki</b></p>';
+
+                SendEmail( emailContent, req, res, function(eresult) {
+                    console.log("SendEmail Called");
+                });
             });
         });
     }
