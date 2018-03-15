@@ -1,6 +1,6 @@
 module.exports = function( emailContent, req, res) {
     const express = require('express');
-    const bunyan = require('bunyan');
+
     const nodemailer = require('nodemailer');
     const restService = express();
     const bodyParser = require('body-parser');
