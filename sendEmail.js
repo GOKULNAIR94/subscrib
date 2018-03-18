@@ -43,27 +43,38 @@ module.exports = function( emailContent, req, res) {
 
     };
 
-    transporter.verify(function(error, success) {
+    transporter.sendMail(message, function(error, info){
         if (error) {
-            console.log(error);
+            console.log( "Error : " + error);
+            speech = "Unable to send mail. Please try again later.";
+            res.json({"status":"error"});
         } else {
-            console.log('Server is ready to take our messages');
-            transporter.sendMail(message, (error, info) => {
-                if (error) {
-                    console.log('Error occurred');
-                    console.log(error.message);
-                    res.json({"status":"error"});
-                }
-//                console.log('Message sent successfully!');
-                else{
-                    console.log('Server responded with "%s"', info.response);
-                    console.log('Sending Mail');
-                    transporter.close();
-                    res.json({"status":"success"});
-                }
-            });
-        }
+            console.log('Email sent: ' + info.response);
+            res.json({"status":"success"});
+        } 
     });
+
+//     transporter.verify(function(error, success) {
+//         if (error) {
+//             console.log(error);
+//         } else {
+//             console.log('Server is ready to take our messages');
+//             transporter.sendMail(message, (error, info) => {
+//                 if (error) {
+//                     console.log('Error occurred');
+//                     console.log(error.message);
+//                     res.json({"status":"error"});
+//                 }
+// //                console.log('Message sent successfully!');
+//                 else{
+//                     console.log('Server responded with "%s"', info.response);
+//                     console.log('Sending Mail');
+//                     transporter.close();
+                    // res.json({"status":"success"});
+//                 }
+//             });
+//         }
+//     });
 
     
 
