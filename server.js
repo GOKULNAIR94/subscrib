@@ -26,12 +26,11 @@ restService.post('/updatedb',function( req,res ){
         var emailId = req.body.email;
         console.log( "Email : " + JSON.stringify(req.body) );
         var sqlConfig = {
-            user: 'viki',
-            password: 'Oracle123',
-            server: 'vikisql.c1abev5luwmn.us-west-1.rds.amazonaws.com',
-            database: 'viki'
-
-        }
+            user: 'abc',
+            password: 'abc',
+            server: 'abc',
+            database: 'abc'
+        };
         var qString = "";
 
         qString = "INSERT INTO Subscribers (email) VALUES ('" + emailId + "')";
